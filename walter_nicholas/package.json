@@ -1,0 +1,21 @@
+{
+  "name": "walter_nicholas",
+  "version": "0.1.0",
+  "description": "A task schema, which helps organize tasks on your to-do list by attribute, such as priority, deadline, location, etc.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Walter Nicholas",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3",
+    "mongoose": "^4.2.5"
+  },
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "chai-http": "^1.0.0",
+    "mocha": "^2.3.3"
+  }
+}

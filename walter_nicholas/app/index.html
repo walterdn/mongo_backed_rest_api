@@ -1,18 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<link rel="stylesheet" type="text/css" href="css/base.css">
 	<meta charset="UTF-8">
 	<title>Task Finder</title>
 </head>
 <body data-ng-app="taskApp">
-	<h1> Task Finder </h1>
+	<h1>Task Finder</h1>
   <main data-ng-controller="tasksController" data-ng-init="retrieveTasks()">
-  	<ul id="tasklist">
-    	<li data-ng-repeat="task in tasks">
-        {{task.description}}
-      </li>
-    </ul>
+  	<button data-ng-click="retrieveTasks()">show all</button><br>
+
+  	<button data-ng-click="showTasksByPriority()">show tasks with priority less than or equal to:</button>
+		<select id="priority">
+	    <option value="1">1</option>
+	    <option value="2">2</option>
+	    <option value="3">3</option>
+	    <option value="4">4</option>
+	    <option value="5">5</option>
+	  </select><br>
+
+	  <button data-ng-click="showTasksByCompletion()">show tasks with completion status:</button>
+		<select id="completionStatus">
+	    <option value=true>true</option>
+	    <option value=false>false</option>
+	  </select><br>
+
+		<form name="newTaskForm" data-ng-submit="createTask(newTask)">
+      <h2>New Task:</h2>
+      
+      <label for="newTaskDescription">Description:</label>
+      <input type="text" id="newTaskDescription" required data-ng-model="newTask.description">
+
+      <label for="newTaskLocation">Location:</label>
+				<select id="newTaskLocation" data-ng-model="newTask.location" placeholder="work">
+			    <option value="work">work</option>
+			    <option value="school">school</option>
+			    <option value="home">home</option>
+			    <option value="other">other</option>
+			  </select> 
+
+		  <label for="newTaskPriority">Priority:</label>
+				<select id="newTaskPriority" data-ng-model="newTask.priority">
+			    <option value="1">1</option>
+			    <option value="2">2</option>
+			    <option value="3">3</option>
+			    <option value="4">4</option>
+			    <option value="5">5</option>
+			  </select>
+
+      <button type="submit" data-ng-disabled="newTaskForm.$invalid">Create New Task</button>
+    </form>
+
+    <br><br>
+    <table id="taskTable">
+    	<tr><td> Description </td><td> Location </td><td> Priority </td><td> Completed </td><td> Delete Tasks </td></tr>
+    	<tr data-ng-repeat="task in tasks">
+    		<td> {{task.description}} </td>
+    		<td> {{task.location}} </td>
+    		<td> {{task.priority}} </td>
+    		<td><button class="updateButton" data-ng-click="updateTask(task)"> {{task.completed}} </button></td>
+    		<td><button class="deleteTasksButton" data-ng-click="deleteTask(task)"> Delete </button></td>
+    </table>
+
   </main>
+	<script src='http://code.jquery.com/jquery-1.9.1.min.js'></script>
   <script src="/bundle.js"></script>
 </body>
 </html>

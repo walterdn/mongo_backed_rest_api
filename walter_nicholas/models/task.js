@@ -4,8 +4,7 @@ var taskSchema = new mongoose.Schema({
   description: String,
   location: {type: String, default: 'work'},
   deadline: Date,
-  priority: {type: Number, min: 0, max: 5},
-  requiresCollab: {type: Boolean, default: false},
+  priority: {type: Number, min: 1, max: 5, default: 1},
   completed: {type: Boolean, default: false}
 });
 

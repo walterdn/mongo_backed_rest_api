@@ -1,0 +1,25 @@
+body {
+	background: lightgrey;
+}
+
+td {
+	border: 1px solid black;
+	width: 200px;
+	height: 40px;
+	font-size: 1.3em;
+	background: white;
+	text-align: center;
+}
+
+.deleteTasksButton, .updateButton {
+	width: 200px;
+	height: 40px;
+	font-size: 1.2em;
+}
+
+.deleteTasksButton {
+	color: red;
+}
+
+#taskTable {
+}

@@ -21,6 +21,14 @@ taskRouter.get('/tasks/priority/:num', function (req, res) {
   });
 });
 
+taskRouter.get('/tasks/completed/:status', function (req, res) {
+  Task.find({completed : req.params.status}, function(err, data) {
+    if (err) return handleError(err, res); 
+
+    res.json(data);
+  });
+});
+
 taskRouter.get('/tasks/location/:loc', function (req, res) {
   Task.find({location : req.params.loc}, function(err, data) {
     if (err) return handleError(err, res); 
@@ -48,11 +56,19 @@ taskRouter.put('/tasks/:id', bodyParser, function (req, res) {
   });
 });
 
-taskRouter.delete('/tasks/:id', bodyParser, eatAuth, function (req, res) {
+taskRouter.delete('/tasks/:id', function (req, res) {
   Task.remove({_id: req.params.id}, function (err) {
     if (err) return handleError(err, res);
 
-    res.json({msg: 'eat auth success!'});
+    res.json({msg: 'Task deleted.'});
   });
 });
+
+// taskRouter.delete('/tasks/:id', bodyParser, eatAuth, function (req, res) {
+//   Task.remove({_id: req.params.id}, function (err) {
+//     if (err) return handleError(err, res);
+
+//     res.json({msg: 'eat auth success!'});
+//   });
+// });
 

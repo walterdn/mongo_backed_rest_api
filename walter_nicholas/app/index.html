@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Task Finder</title>
+</head>
+<body data-ng-app="taskApp">
+	<h1> Task Finder </h1>
+  <main data-ng-controller="tasksController" data-ng-init="retrieveTasks()">
+  	<ul id="tasklist">
+    	<li data-ng-repeat="task in tasks">
+        {{task.description}}
+      </li>
+    </ul>
+  </main>
+  <script src="/bundle.js"></script>
+</body>
+</html>

@@ -3,6 +3,69 @@ module.exports = function(app) {
   	$scope.tasks = [];
   	var defaults = {location: 'work', priority: 1};	
     $scope.newTask = Object.create(defaults);
+    $scope.token = false;
+    $scope.username = '';
+
+    $scope.signUp = function() {
+      $scope.username = $('input[id="newUsername"]').val();
+      var password = $('input[id="newPassword"]').val();
+      var repeated = $('input[id="repeated"]').val();
+      if(!($scope.username != '' && password != '' && repeated != '')) alert('Fill out all fields');
+      else if(repeated != password) alert('password != repeated');
+      else {
+        var newUser = {"username": $scope.username, "password": password};
+        
+        var successCb = function(res) {
+          if(res.data.token) $scope.token = res.data.token;
+        };
+        var errorCb = function(err) {
+          console.log(err.data.msg);
+          alert(err.data.msg);
+        };
+
+        var req = {
+          method: 'POST',
+          url:'/api/signup',
+          data: newUser
+        };
+
+        $http(req).then(successCb, errorCb);
+      } 
+    };
+
+    // $scope.signIn = function() {
+    //   $scope.username = $('input[id="username"]').val();
+    //   var password = $('input[id="password"]').val();
+    //   if(!($scope.username != '' && password != '')) alert('Fill out all fields.');
+    //   else {
+
+    //     var successCb = function(res) {
+    //       if(res.data.token) $scope.token = res.data.token;
+    //     };
+
+    //     var errorCb = function(err) {
+    //       console.log(err.data)
+    //     };
+
+    //     var user = $scope.username;
+    //     var req = {
+    //       method: 'GET',
+    //       url: '/api/signin'
+    //       headers: {"Authorization": "Basic " + btoa(user + ":" + password)}
+    //     };
+
+    //     $http(req).then(successCb, errorCb);
+
+        // var newUser = {"username": $scope.username, "password": password};
+        // $http.post('/api/signup', newUser)
+        //   .then(function(res) {
+        //     if(res.data.token) $scope.token = res.data.token;
+        //   }, function(err) {
+        //     console.log(err.data)
+        //   });
+    //   } 
+    // };
+    
 
     $scope.showTasksByPriority = function() {
 			var priority = $('select[id="priority"]').val();
@@ -57,14 +120,28 @@ module.exports = function(app) {
     };
 
     $scope.deleteTask = function(task) {
-      $scope.tasks.splice($scope.tasks.indexOf(task), 1);
-      $http.delete('/api/tasks/' + task._id)
-        .then(function(res) {
-          console.log('task deleted');
-        }, function(err) {
-          console.log(err.data);
+      if(!($scope.token)) alert('Must be logged in to delete tasks.');
+      else {
+        $scope.tasks.splice($scope.tasks.indexOf(task), 1);
+
+        var successCb = function(res) {
+          console.log('task deleted.')
+        };
+
+        var errorCb = function(err) {
+          console.log(err.data.msg);
           $scope.retrieveTasks();
-        });
+        };
+
+        var req = {
+          method: 'POST',
+          url:'/api/tasks/delete/' + task._id,
+          data: {token: $scope.token}
+        };
+
+        $http(req).then(successCb, errorCb);
+  
+      }
     };
 
   }]);

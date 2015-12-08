@@ -1,0 +1,22 @@
+$a-variable-height: 40px;
+
+body {
+	background: cornsilk;
+}
+
+h1 {
+	font-size: 3em;
+}
+
+h2 {
+	font-size: 2em;
+}
+
+td {
+	border: 1px solid black;
+	width: 200px;
+	height: $a-variable-height;
+	font-size: 1.3em;
+	background: white;
+	text-align: center;
+}

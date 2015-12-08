@@ -1,29 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<link rel="stylesheet" type="text/css" href="css/base.css">
+	<link rel="stylesheet" type="text/css" href="css/application.css">
 	<meta charset="UTF-8">
 	<title>Task Finder</title>
 </head>
 <body data-ng-app="taskApp">
 	<h1>Task Finder</h1>
   <main data-ng-controller="tasksController" data-ng-init="retrieveTasks()">
-  	<button data-ng-click="retrieveTasks()">show all</button><br>
 
-  	<button data-ng-click="showTasksByPriority()">show tasks with priority less than or equal to:</button>
-		<select id="priority">
-	    <option value="1">1</option>
-	    <option value="2">2</option>
-	    <option value="3">3</option>
-	    <option value="4">4</option>
-	    <option value="5">5</option>
-	  </select><br>
+  	<div class="login" ng-if="!token">
+  			<label>username:</label><input id="newUsername" type="text" maxlength="10" value=""><br>
+  			<label>password:</label><input id="newPassword" type="text" maxlength="10" value=""><br>
+  			<label>repeated: </label><input id="repeated" type="text" maxlength="10" value=""><br>
 
-	  <button data-ng-click="showTasksByCompletion()">show tasks with completion status:</button>
-		<select id="completionStatus">
-	    <option value=true>true</option>
-	    <option value=false>false</option>
-	  </select><br>
+	  		<button data-ng-click="signUp()">sign up</button><br><br>
+
+	  		<label>username:</label><input id="username" type="text" maxlength="10" value=""><br>
+  			<label>password:</label><input id="password" type="text" maxlength="10" value=""><br>
+	  		<button data-ng-click="signIn()">sign in</button>
+  	</div>
+  	<div class="login loggedIn" ng-if="token">
+  		Logged in as {{username}}.<br>
+  	</div>
+
+  	<div class="sortButtonsContainer">
+	  	<button data-ng-click="retrieveTasks()">show all</button><br>
+
+	  	<button data-ng-click="showTasksByPriority()">show tasks with priority less than or equal to:</button>
+			<select id="priority">
+		    <option value="1">1</option>
+		    <option value="2">2</option>
+		    <option value="3">3</option>
+		    <option value="4">4</option>
+		    <option value="5">5</option>
+		  </select><br>
+
+		  <button data-ng-click="showTasksByCompletion()">show tasks with completion status:</button>
+			<select id="completionStatus">
+		    <option value=true>true</option>
+		    <option value=false>false</option>
+		  </select><br>
+		</div>
 
 		<form name="newTaskForm" data-ng-submit="createTask(newTask)">
       <h2>New Task:</h2>

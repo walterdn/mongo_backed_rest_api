@@ -1,5 +1,8 @@
 var gulp = require('gulp');
 var webpack = require('webpack-stream');
+var sass = require('gulp-sass');
+var minifyCSS = require('gulp-minify-css');
+var sourcemaps = require('gulp-sourcemaps');
 
 gulp.task('static:dev', function() {
   gulp.src('app/**/*.html')
@@ -7,8 +10,16 @@ gulp.task('static:dev', function() {
 });
 
 gulp.task('cssFiles:dev', function() {
-  gulp.src('app/css/*.css')
+  gulp.src('app/scss/**/*.scss')
+  .pipe(sourcemaps.init())
+    .pipe(sass())
+    .pipe(minifyCSS())
+  .pipe(sourcemaps.write())
   .pipe(gulp.dest('build/css/'));
+});
+
+gulp.task('css:watch', function () {
+  gulp.watch('app/css/**/*.css', ['css:dev']);
 });
 
 gulp.task('webpack:dev', function() {

@@ -1,8 +1,7 @@
 var gulp = require('gulp');
 var webpack = require('webpack-stream');
-var sass = require('gulp-sass');
 var minifyCSS = require('gulp-minify-css');
-var sourcemaps = require('gulp-sourcemaps');
+var concatCSS = require('gulp-concat-css');
 
 gulp.task('static:dev', function() {
   gulp.src('app/**/*.html')
@@ -10,11 +9,12 @@ gulp.task('static:dev', function() {
 });
 
 gulp.task('cssFiles:dev', function() {
-  gulp.src('app/scss/**/*.scss')
-  .pipe(sourcemaps.init())
-    .pipe(sass())
+  return gulp.src([
+    'app/css/base.css',
+    'app/css/layout.css',
+    'app/css/state.css'])
+    .pipe(concatCSS('styles.min.css'))
     .pipe(minifyCSS())
-  .pipe(sourcemaps.write())
   .pipe(gulp.dest('build/css/'));
 });
 

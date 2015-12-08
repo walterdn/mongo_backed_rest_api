@@ -1,5 +1,13 @@
 body {
-	background: lightgrey;
+	background: cornsilk;
+}
+
+h1 {
+	font-size: 3em;
+}
+
+h2 {
+	font-size: 2em;
 }
 
 td {
@@ -9,17 +17,4 @@ td {
 	font-size: 1.3em;
 	background: white;
 	text-align: center;
-}
-
-.deleteTasksButton, .updateButton {
-	width: 200px;
-	height: 40px;
-	font-size: 1.2em;
-}
-
-.deleteTasksButton {
-	color: red;
-}
-
-#taskTable {
 }

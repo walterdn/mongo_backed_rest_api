@@ -1,5 +1,5 @@
 .loggedIn {
-	height: $a-variable-height;
+	height: 40px;
 	font-size: 1.4em;
 	text-align: center;
 }

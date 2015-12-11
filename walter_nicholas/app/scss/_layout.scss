@@ -1,0 +1,54 @@
+#taskTable {
+	@include center;
+}
+
+.title {
+	@include container(lime, 3px, 70px, 270px);
+	@include center;
+}
+
+.formContainer {
+	@include container(lime, 3px, 170px, 540px);
+	padding: 10px;
+	text-align: center;
+	@include center;
+}
+
+.sortButtonsContainer {
+	@include container(yellow, 3px, 125px, 430px);
+	@include center;
+
+
+	button {
+		margin: 3px;
+		padding: 4px;
+		font-size: 1.1em;
+	}
+	select {
+		font-size: 1.1em;
+		padding: 4px;
+	}
+}
+
+.deleteTasksButton, .updateButton {
+	width: 200px;
+	height: $a-variable-height;
+	font-size: 1.2em;
+}
+
+.deleteTasksButton {
+	color: darkred;
+}
+
+.login {
+	@include container(salmon, 10px, 200px, 250px);
+	position: absolute;
+	right: 6px;
+	top: 6px;
+	padding: 3px;
+	
+	input {
+		margin: 3px;
+	}
+}
+

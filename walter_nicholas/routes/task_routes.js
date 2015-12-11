@@ -56,15 +56,17 @@ taskRouter.put('/tasks/:id', bodyParser, function (req, res) {
   });
 });
 
-taskRouter.delete('/tasks/:id', function (req, res) {
+//had to use post instead of delete because angular's $http delete cannot send an object with the request,
+//and we need to send an object with token to authenticate
+taskRouter.post('/tasks/delete/:id', bodyParser, eatAuth, function (req, res) { 
   Task.remove({_id: req.params.id}, function (err) {
     if (err) return handleError(err, res);
 
-    res.json({msg: 'Task deleted.'});
+    res.json({msg: 'eat auth success!'});
   });
 });
 
-// taskRouter.delete('/tasks/:id', bodyParser, eatAuth, function (req, res) {
+// taskRouter.delete('/tasks/delete/:id', bodyParser, eatAuth, function (req, res) {
 //   Task.remove({_id: req.params.id}, function (err) {
 //     if (err) return handleError(err, res);
 

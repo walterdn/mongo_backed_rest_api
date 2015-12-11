@@ -3,6 +3,7 @@ var User = require(__dirname + '/../models/user');
 
 module.exports = exports = function(req, res, next) {
   var token = req.headers.token || (req.body)? req.body.token : '';  
+  
   if (!token) {
     console.log('no token');
     return res.status(401).json({msg: 'no token'});

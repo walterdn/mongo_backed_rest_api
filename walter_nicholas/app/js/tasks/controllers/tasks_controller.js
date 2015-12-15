@@ -1,10 +1,13 @@
+var angular = window.angular;
+
 module.exports = function(app) {
   app.controller('tasksController', ['$scope', '$http', function($scope, $http) {
   	$scope.tasks = [];
-  	var defaults = {location: 'work', priority: 1};	
-    $scope.newTask = Object.create(defaults);
+    $scope.defaults = {location: 'work', priority: 1};
+    $scope.newTask = angular.copy($scope.defaults);
     $scope.token = false;
     $scope.username = '';
+    // var tasksResource = cfResource('tasks');
 
     $scope.signUp = function() {
       $scope.username = $('input[id="newUsername"]').val();
@@ -93,7 +96,7 @@ module.exports = function(app) {
       $http.post('/api/tasks', task)
         .then(function(res) {
           $scope.tasks.push(res.data);
-          $scope.newTask = Object.create(defaults);
+          $scope.newTask = Object.create($scope.defaults);
         }, function(err) {
           console.log(err.data)
         });
@@ -143,6 +146,5 @@ module.exports = function(app) {
   
       }
     };
-
   }]);
 };

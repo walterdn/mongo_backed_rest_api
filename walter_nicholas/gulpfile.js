@@ -5,7 +5,7 @@ var minifyCSS = require('gulp-minify-css');
 var sourcemaps = require('gulp-sourcemaps');
 
 gulp.task('static:dev', function() {
-  gulp.src('app/**/*.html')
+  gulp.src('app/**/*.html') 
   .pipe(gulp.dest('build/'));
 });
 
@@ -32,5 +32,15 @@ gulp.task('webpack:dev', function() {
   .pipe(gulp.dest('build/'));
 });
 
-gulp.task('build:dev', ['webpack:dev', 'static:dev', 'cssFiles:dev']);
+gulp.task('webpack:test', function() {
+  return gulp.src('test/client/test_entry.js')
+  .pipe(webpack({
+    output: {
+      filename: 'test_bundle.js'
+    } 
+  }))
+  .pipe(gulp.dest('test/client/'));
+});
+
+gulp.task('build:dev', ['webpack:dev', 'static:dev', 'cssFiles:dev', 'webpack:test']);
 gulp.task('default', ['build:dev']);

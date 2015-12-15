@@ -76,7 +76,8 @@
     		<td> {{task.description}} </td>
     		<td> {{task.location}} </td>
     		<td> {{task.priority}} </td>
-    		<td><button class="updateButton" data-ng-click="updateTask(task)"> {{task.completed}} </button></td>
+    		<td><button data-ng-click="toggleEditing()">allow/disallow task modification</button><br>
+    				<button ng-if="taskEditing" class="updateButton" data-ng-click="updateTask(task)">{{task.completed}}</button></td>
     		<td><button class="deleteTasksButton" data-ng-click="deleteTask(task)"> Delete </button></td>
     </table>
 

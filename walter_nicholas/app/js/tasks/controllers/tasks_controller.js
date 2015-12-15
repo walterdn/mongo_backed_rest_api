@@ -7,6 +7,8 @@ module.exports = function(app) {
     $scope.newTask = angular.copy($scope.defaults);
     $scope.token = false;
     $scope.username = '';
+    $scope.taskEditing = false;
+
     // var tasksResource = cfResource('tasks');
 
     $scope.signUp = function() {
@@ -92,6 +94,7 @@ module.exports = function(app) {
         });
     };
 
+
     $scope.createTask = function(task) {
       $http.post('/api/tasks', task)
         .then(function(res) {
@@ -112,8 +115,8 @@ module.exports = function(app) {
     };
 
     $scope.updateTask = function(task) {
-    	if(task.completed) task.completed = false;
-    	else task.completed = true;
+     	if(task.completed) task.completed = false;
+     	else task.completed = true;
       $http.put('/api/tasks/' + task._id, task)
         .then(function(res) {
           console.log('task completion status updated.');
@@ -121,6 +124,11 @@ module.exports = function(app) {
           console.log(err.data);
         });
     };
+
+    $scope.toggleEditing = function() {
+      if($scope.taskEditing) $scope.taskEditing = false;
+      else $scope.taskEditing = true;
+    }
 
     $scope.deleteTask = function(task) {
       if(!($scope.token)) alert('Must be logged in to delete tasks.');
